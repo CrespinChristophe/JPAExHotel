@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,5 +25,8 @@ public class Client {
 
     @Column(nullable = false)
     private String prenom;
+
+    @ManyToMany(mappedBy = "clients")
+    private List<Chambre> chambres;
 
 }
