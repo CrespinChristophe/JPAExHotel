@@ -29,4 +29,7 @@ public class Gerant {
     @Column(nullable = false)
     private LocalDateTime debutCarriere;
 
+    @OneToOne
+    private Hotel hotel;
+
 }

@@ -35,6 +35,8 @@ public class Chambre {
     @ManyToMany(cascade = { CascadeType.PERSIST})
     private List<Client> clients;
 
+    @ManyToOne
+    private Hotel hotel;
 
 
 
