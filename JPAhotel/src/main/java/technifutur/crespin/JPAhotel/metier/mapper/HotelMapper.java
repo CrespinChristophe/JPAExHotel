@@ -6,6 +6,7 @@ import technifutur.crespin.JPAhotel.model.dto.HotelDTO;
 import technifutur.crespin.JPAhotel.model.entities.Gerant;
 import technifutur.crespin.JPAhotel.model.entities.Hotel;
 import technifutur.crespin.JPAhotel.model.forms.GerantForm;
+import technifutur.crespin.JPAhotel.model.forms.HotelForm;
 
 @Service
 public class HotelMapper {
@@ -30,7 +31,16 @@ public class HotelMapper {
 
     }
 
-    public Hotel formToEntity()
+    public Hotel formToEntity(HotelForm form){
+        if(form == null)
+            return null;
+
+        return Hotel.builder()
+                .nom(form.getNom())
+                .adresse(form.getAdresse())
+                .nbrEtoile(form.getNbrEtoile())
+                .build();
+    }
 
     /*public GerantDTO entityToDTO(Gerant entity){
 
