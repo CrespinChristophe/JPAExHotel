@@ -20,7 +20,7 @@ public class GerantDTO {
 
     @Data
     @AllArgsConstructor
-    public static class HotelDTO{
+    public static class HotelDTO{//infos d'hotel DU GERANT, pas les infos générales de l'hotel !!!!
         private Long id;
         private String nom;
     }
