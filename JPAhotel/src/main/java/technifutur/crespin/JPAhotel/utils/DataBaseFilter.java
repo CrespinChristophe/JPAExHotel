@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import technifutur.crespin.JPAhotel.data.repo.GerantRepository;
 import technifutur.crespin.JPAhotel.data.repo.HotelRepository;
 import technifutur.crespin.JPAhotel.model.entities.Gerant;
+import technifutur.crespin.JPAhotel.model.entities.Hotel;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -34,6 +35,27 @@ public class DataBaseFilter implements InitializingBean {
                 .nom("Desmet")
                 .build();
         gRepo.save(g);
+
+        Hotel h = Hotel.builder()
+                .adresse("rue du nord")
+                .id(133L)
+                .nbrEtoile((byte)3)
+                .nom("Hotel du nord")
+                .build();
+
+        h = Hotel.builder()
+                .adresse("rue du sud")
+                .id(132L)
+                .nbrEtoile((byte)5)
+                .nom("Hotel du sud")
+                .build();
+
+        Hotel.builder()
+                .adresse("rue du l'est")
+                .id(131L)
+                .nbrEtoile((byte)1)
+                .nom("Hotel de l'est")
+                .build();
 
 
 
