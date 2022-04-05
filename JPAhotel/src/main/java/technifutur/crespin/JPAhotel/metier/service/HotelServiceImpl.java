@@ -48,7 +48,18 @@ public class HotelServiceImpl implements HotelService{
 
     @Override
     public HotelDTO update(Long id, HotelForm form) {
-        return null;
+        Hotel entity = repository.findById(id)
+                .orElseThrow(() -> new ElementNotFoundException(id, HotelDTO.class));
+
+        entity.setNom(entity.getNom());
+        entity.setAdresse(entity.getAdresse());
+        entity.setNbrEtoile(form.getNbrEtoile());
+
+        repository.save(entity);
+
+
+
+        return mapper.entityToDTO(entity);
     }
 
     @Override
