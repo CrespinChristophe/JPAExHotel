@@ -57,13 +57,13 @@ public class HotelServiceImpl implements HotelService{
 
         repository.save(entity);
 
-
-
         return mapper.entityToDTO(entity);
     }
 
     @Override
     public HotelDTO delete(Long id) {
-        return null;
+        HotelDTO dto = getOne(id);
+        repository.deleteById(id);
+        return dto;
     }
 }
