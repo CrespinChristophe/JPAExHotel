@@ -60,6 +60,21 @@ public class HotelServiceImpl implements HotelService{
         return mapper.entityToDTO(entity);
     }
 
+    //essais
+    /*public HotelDTO updateGerant(Long id, HotelForm form) {
+        Hotel entity = repository.findById(id)
+                .orElseThrow(() -> new ElementNotFoundException(id, HotelDTO.class));
+
+        HotelDTO hotelDTOdto = mapper.entityToDTO(entity);
+        hotelDTOdto.getGerant()
+        entity.setAdresse(entity.getAdresse());
+        entity.setNbrEtoile(form.getNbrEtoile());
+
+        repository.save(entity);
+
+        return mapper.entityToDTO(entity);
+    }*/
+
     @Override
     public HotelDTO delete(Long id) {
         HotelDTO dto = getOne(id);
