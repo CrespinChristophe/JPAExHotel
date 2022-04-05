@@ -37,7 +37,11 @@ public class HotelServiceImpl implements HotelService{
 
     @Override
     public List<HotelDTO> getAll() {
-        return null;
+        return repository.findAll()
+                .stream()
+                .map(mapper::entityToDTO)
+                .toList();
+
     }
 
     @Override
