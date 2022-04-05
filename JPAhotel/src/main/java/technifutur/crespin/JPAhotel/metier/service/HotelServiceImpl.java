@@ -23,7 +23,9 @@ public class HotelServiceImpl implements HotelService{
 
     @Override
     public HotelDTO insert(HotelForm form) {
-        return null;
+        Hotel entity = mapper.formToEntity(form);
+        repository.save(entity);
+        return mapper.entityToDTO(entity);
     }
 
     @Override
