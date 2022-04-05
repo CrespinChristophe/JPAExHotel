@@ -1,25 +1,26 @@
 package technifutur.crespin.JPAhotel.metier.service;
 
-import technifutur.crespin.JPAhotel.model.dto.GerantDTO;
+import technifutur.crespin.JPAhotel.model.dto.HotelDTO;
 import technifutur.crespin.JPAhotel.model.forms.GerantForm;
+import technifutur.crespin.JPAhotel.model.forms.HotelForm;
 
 import java.util.List;
 
 public interface HotelService {
     // CREATE
 
-    public GerantDTO insert(GerantForm form);
+    public HotelDTO insert(HotelForm form);
 
     // READ
 
-    public GerantDTO getOne(Long id);
-    public List<GerantDTO> getAll();
+    public HotelDTO getOne(Long id);
+    public List<HotelDTO> getAll();
 
     // UPDATE
 
-    public GerantDTO update(Long id, GerantForm form);
+    public HotelDTO update(Long id, HotelForm form);
 
     // DELETE
 
-    public GerantDTO delete ( Long id);
+    public HotelDTO delete ( Long id);
 }

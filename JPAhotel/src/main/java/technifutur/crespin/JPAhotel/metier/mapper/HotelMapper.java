@@ -42,39 +42,6 @@ public class HotelMapper {
                 .build();
     }
 
-    /*public GerantDTO entityToDTO(Gerant entity){
 
-
-        if(entity == null)
-            return null;
-
-        Hotel hotelEntity = entity.getHotel();
-        GerantDTO.HotelDTO hotel = hotelEntity == null ? null :
-                new GerantDTO.HotelDTO( hotelEntity.getId(), hotelEntity.getNom() );
-
-
-        return GerantDTO.builder()
-                .id(entity.getId())
-                .nom(entity.getNom())
-                .prenom(entity.getPrenom())
-                .debutCarriere(entity.getDebutCarriere())
-                .hotel(hotel)
-                .build();
-
-
-    }
-
-    public Gerant formToEntity(GerantForm form){
-
-        if(form == null)
-            return null;
-
-        return Gerant.builder()
-                .nom(form.getNom())
-                .prenom(form.getPrenom())
-                .debutCarriere(form.getDateCarriere())
-                .build();
-
-    }*/
 
 }
