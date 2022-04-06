@@ -4,6 +4,7 @@ package technifutur.crespin.JPAhotel.controllers;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import technifutur.crespin.JPAhotel.data.exceptions.ElementNotFoundException;
 import technifutur.crespin.JPAhotel.metier.service.GerantService;
@@ -12,6 +13,7 @@ import technifutur.crespin.JPAhotel.model.dto.GerantDTO;
 import technifutur.crespin.JPAhotel.model.forms.GerantForm;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -51,9 +53,9 @@ public class GerantController {
 
     //POST - http://localhost:8080/gerant
     //     - http://localhost:8080/gerant/add
-    @PostMapping({"", "/add"}) //value et path sont interchangeables mais y a une subtilité //à revoir!!!
+    @PostMapping("/add") //value et path sont interchangeables mais y a une subtilité //à revoir!!!
     //implicitement c'est value
-    public ResponseEntity<?> insert(GerantForm form){
+    public ResponseEntity<GerantDTO> insert(@Valid @RequestBody GerantForm form){
 
             return ResponseEntity.ok(service.insert(form));
 

@@ -21,8 +21,6 @@ import java.util.List;
 public class HotelController {
     private final HotelService service;
 
-
-
     public HotelController(HotelService service) {
         this.service = service;
     }
@@ -72,6 +70,13 @@ public class HotelController {
 
     }
 
+    @PutMapping({"/hotel/{idHotel}/{idGerant}"})
+    public ResponseEntity<?> updateGerant(@PathVariable Long idHotel, @PathVariable Long idGerant){
+
+        return ResponseEntity.ok( service.updateGerant(idHotel, idGerant) );
+
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
 
@@ -79,17 +84,14 @@ public class HotelController {
 
     }
 
-    @ExceptionHandler(ElementNotFoundException.class)
-    public ResponseEntity<ErrorDTO> handleElementNotFound(ElementNotFoundException ex, HttpServletRequest request) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(
-                        ErrorDTO.builder()
-                                .message(ex.getMessage())
-                                .method(HttpMethod.resolve(request.getMethod()))
-                                .status(404)
-                                .uri(request.getRequestURI())
-                                .build()
-                );
+    @GetMapping("/stars")// on aurait pu faire @GetMapping(params = "stars") et ne pas faire /stars, ce serait comme une surcharge
+    //de méthode car il y a le parametre stars, donc, ce ne sera pas getAll() qui sera appellée mais cette méthode-ci
+    public ResponseEntity<?> getParam(@RequestParam byte stars){
+
+        return ResponseEntity.ok( service.getStars(stars));
+
     }
+
+
 
 }

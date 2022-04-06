@@ -15,10 +15,12 @@ public interface HotelService {
 
     public HotelDTO getOne(Long id);
     public List<HotelDTO> getAll();
+    public List<HotelDTO> getStars(int stars);
 
     // UPDATE
 
     public HotelDTO update(Long id, HotelForm form);
+    public HotelDTO updateGerant(Long idHotel, Long idNewGerant);
 
     // DELETE
 

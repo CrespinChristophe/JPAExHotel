@@ -2,9 +2,11 @@ package technifutur.crespin.JPAhotel.metier.service;
 
 import org.springframework.stereotype.Service;
 import technifutur.crespin.JPAhotel.data.exceptions.ElementNotFoundException;
+import technifutur.crespin.JPAhotel.data.repo.GerantRepository;
 import technifutur.crespin.JPAhotel.data.repo.HotelRepository;
 import technifutur.crespin.JPAhotel.metier.mapper.HotelMapper;
 import technifutur.crespin.JPAhotel.model.dto.HotelDTO;
+import technifutur.crespin.JPAhotel.model.entities.Gerant;
 import technifutur.crespin.JPAhotel.model.entities.Hotel;
 import technifutur.crespin.JPAhotel.model.forms.HotelForm;
 
@@ -14,10 +16,13 @@ import java.util.List;
 public class HotelServiceImpl implements HotelService{
 
     private final HotelRepository repository;
+    private final GerantRepository gerantRepository;
+
     private final HotelMapper mapper;
 
-    public HotelServiceImpl(HotelRepository repository, HotelMapper mapper) {
+    public HotelServiceImpl(HotelRepository repository, GerantRepository gerantRepository, HotelMapper mapper) {
         this.repository = repository;
+        this.gerantRepository = gerantRepository;
         this.mapper = mapper;
     }
 
@@ -47,6 +52,25 @@ public class HotelServiceImpl implements HotelService{
     }
 
     @Override
+    public List<HotelDTO> getStars(int stars) {
+
+//        List <HotelDTO> listReturn = new ArrayList<>();
+//        List<HotelDTO> listHotel;
+        return repository.findAll()
+                .stream()
+                .filter((hotel -> hotel.getNbrEtoile() >= stars))
+                .map(mapper::entityToDTO)
+                .toList();
+
+        /*for(HotelDTO listTemp : listHotel){
+            if(listTemp.getNbrEtoile() >= stars)
+                listReturn.add(getOne(listTemp.getId()));
+        }*/
+
+        /*return listReturn;*/
+    }
+
+    @Override
     public HotelDTO update(Long id, HotelForm form) {
         Hotel entity = repository.findById(id)
                 .orElseThrow(() -> new ElementNotFoundException(id, HotelDTO.class));
@@ -60,20 +84,27 @@ public class HotelServiceImpl implements HotelService{
         return mapper.entityToDTO(entity);
     }
 
-    //essais
-    /*public HotelDTO updateGerant(Long id, HotelForm form) {
-        Hotel entity = repository.findById(id)
-                .orElseThrow(() -> new ElementNotFoundException(id, HotelDTO.class));
+    @Override
+    public HotelDTO updateGerant(Long idHotel, Long idNewGerant) {
+        Hotel entityHotel = repository.findById(idHotel)
+                .orElseThrow(() -> new ElementNotFoundException(idHotel, HotelDTO.class));
 
-        HotelDTO hotelDTOdto = mapper.entityToDTO(entity);
-        hotelDTOdto.getGerant()
-        entity.setAdresse(entity.getAdresse());
-        entity.setNbrEtoile(form.getNbrEtoile());
 
-        repository.save(entity);
+        Gerant entityGerant = gerantRepository.findById(idNewGerant)
+                .orElseThrow(() -> new ElementNotFoundException(idNewGerant, Gerant.class));
 
-        return mapper.entityToDTO(entity);
-    }*/
+
+        entityHotel.setGerant(entityGerant);
+        repository.save(entityHotel);
+
+
+
+
+        return mapper.entityToDTO(entityHotel);
+
+
+
+    }
 
     @Override
     public HotelDTO delete(Long id) {

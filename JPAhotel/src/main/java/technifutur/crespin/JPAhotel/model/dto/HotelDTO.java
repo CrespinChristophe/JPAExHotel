@@ -13,6 +13,7 @@ public class HotelDTO {
     private String nom;
     String adresse;
     private GerantDTO gerant;
+    //private ChambreDTO chambre;
 
     @Data
     @AllArgsConstructor
