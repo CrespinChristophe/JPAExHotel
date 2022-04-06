@@ -1,9 +1,15 @@
 package technifutur.crespin.JPAhotel.controllers;
 
+import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.RolesAllowed;
 
 
 @RestController
@@ -42,23 +48,28 @@ public class DemoController {
     }
 
     @GetMapping("/for-all")
+    @PreAuthorize("permitAll()")
     public String getForAll(){
         return "pour tous";
     }
 
     @GetMapping("/for-connected")
-    public String getForConnected(){
-        return "pour tous";
+    @PreAuthorize("isAuthenticated()")
+    public String getForConnected(Authentication auth){
+        return "pour connected";
     }
 
     @GetMapping("/for-user")
+   // @Secured("ROLE_USER")//meme chose que @RolesAllowed("ROLE_USER")
+    @RolesAllowed("ROLE_USER")
     public String getForRoleUser(){
-        return "pour tous";
+        return "pour user";
     }
 
     @GetMapping("/for-admin")
+    @Secured("ROLE_ADMIN")
     public String getForAdmin(){
-        return "pour tous";
+        return "pour admin";
     }
 
 
