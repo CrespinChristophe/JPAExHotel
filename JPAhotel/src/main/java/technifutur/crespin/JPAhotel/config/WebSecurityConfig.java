@@ -1,4 +1,4 @@
-package technifutur.config;
+package technifutur.crespin.JPAhotel.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -47,6 +47,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement()
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS);// pour ne pas
         //enregistrer de COOKIE
+
+        //pour contrer le header de base X-Frame-Options qui est à deny et
+        //ne plus le retrouver à l'intérieur de la réponse de la requete
+        http.headers()
+                .frameOptions()
+                .disable();
+
 
         http.authorizeRequests()
 //                .antMatchers(HttpMethod.GET, "/hotel/**").authenticated()//n'importe quel adresse après hotel
